@@ -1,29 +1,53 @@
 #!/usr/bin/python3
-"""Contains the Pascal triangle implementation"""
+"""Pascal Triangle Challenge"""
 
 
 def pascal_triangle(n):
-     """Creates the pascal triangle with n rows"""
-     pascal_list = []
-     for i in range(n):
-         pascal_list.append((list((nCr(i, j) for j in range(0, i + 1)))))
-     return pascal_list
- def factorial(n):
-     """
-     Returns the factorial of a given number
-     Needed in the implementation of the nCr function
-     """
-     result = 1
-     if n == 0 and n == 1:
-        return 1
-     if n < 0:
-        raise ValueError("No factorial of a negative number")
-     for i in range(1, n + 1):
-        result = result * i
+    """returns a list of lists of numbers
+    representing the pacals triangle"""
+    if n <= 0:
+        return []
 
-     return result
- def nCr(n, r):
-         """helper function for pascal_triangle
-  Computes nCr which is useful in creating the triangle
-  """
-      return int(factorial(n) / (factorial(r) * factorial(n - r)))
+    pascal_triangle = [0] * n
+
+    for i in range(n):
+        # define a row and fill first and last idx with 1
+        new_row = [0] * (i+1)
+        new_row[0] = 1
+        new_row[len(new_row) - 1] = 1
+
+        for j in range(1, i):
+            if j > 0 and j < len(new_row):
+                a = pascal_triangle[i - 1][j]
+                b = pascal_triangle[i - 1][j - 1]
+                new_row[j] = a + b
+
+        pascal_triangle[i] = new_row
+
+    return pascal_triangle#!/usr/bin/python3
+"""Pascal Triangle Challenge"""
+
+
+def pascal_triangle(n):
+    """returns a list of lists of numbers
+    representing the pacals triangle"""
+    if n <= 0:
+        return []
+
+    pascal_triangle = [0] * n
+
+    for i in range(n):
+        # define a row and fill first and last idx with 1
+        new_row = [0] * (i+1)
+        new_row[0] = 1
+        new_row[len(new_row) - 1] = 1
+
+        for j in range(1, i):
+            if j > 0 and j < len(new_row):
+                a = pascal_triangle[i - 1][j]
+                b = pascal_triangle[i - 1][j - 1]
+                new_row[j] = a + b
+
+        pascal_triangle[i] = new_row
+
+    return pascal_triangle
